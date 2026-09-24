@@ -1,0 +1,96 @@
+.btn-container{
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to bottom, rgb(30, 42, 34), rgb(0, 2, 1)); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0%;   
+}
+.button{
+    width: 400px;
+    height: 200px;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:linear-gradient(rgba(0, 0, 0, 0.692),rgb(4, 35, 18));
+}
+
+/* --- order track: holds the button / van / done state, clips anything outside it --- */
+.order-track{
+  position: relative;
+  width: 55%;
+  height: 50px;
+  overflow: hidden;   /* this is what stops the van escaping the button */
+  background: linear-gradient(to right, #fdfdfd, #f0efec);
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.btn-primary {
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(to right, #fdfdfd, #f0efec);
+  color: black;
+  border: 2px solid aqua;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.25s ease, transform 0.3s ease;
+}
+.btn-primary:hover{
+  transform: scale(1);
+  border: 2px solid rgb(204, 54, 154);
+  box-shadow: rgb(48, 251, 251);
+}
+.btn-primary.btn-hidden{
+  opacity: 0;
+  pointer-events: none;
+}
+
+.van{
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-top: -18px;   /* half of 36px van height, centers without transform */
+  z-index: 2;          /* stays above the done label while driving */
+  transition: opacity 0.35s ease;
+}
+.van-fade .wheel-spin{
+  animation-play-state: paused;  /* wheels stop turning once the van is hidden */
+}
+.wheel-spin{
+  transform-origin: center;
+  animation: spin 0.35s linear infinite;
+}
+@keyframes spin{
+  to{ transform: rotate(360deg); }
+}
+
+.order-done{
+  position: absolute;
+  inset: 0;   /* full width now — van fades out, so no gap needs to be reserved for it */
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: linear-gradient(to right, #fdfdfd, #f0efec);
+  color: #0d603a;
+  border: 1px solid #0d603a;
+  border-radius: 8px;
+  font-weight: bold;
+}
+.check-dot{
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #22c55e;
+  color: #fff;
+  font-size: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
