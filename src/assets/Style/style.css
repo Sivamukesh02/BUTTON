@@ -1,49 +1,55 @@
 .btn-container{
     width: 100%;
     height: 100vh;
-    background: linear-gradient(to bottom, rgb(30, 42, 34), rgb(0, 2, 1)); 
+    background: #000000;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
-    padding: 0%;   
+    padding: 0%;
 }
+
+/* outer white/cream card — matches the reference screenshot's rounded white frame */
 .button{
-    width: 400px;
-    height: 200px;
-    border-radius: 1rem;
+    width: 560px;
+    max-width: 92vw;
+    padding: 28px;
+    box-sizing: border-box;
+    border-radius: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    background:linear-gradient(rgba(0, 0, 0, 0.692),rgb(4, 35, 18));
+    background: #f4f0e6;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
 }
 
-/* --- order track: holds the button / van / done state, clips anything outside it --- */
+/* inner black capsule — this is what glows pink, holds the button/van/done states */
 .order-track{
   position: relative;
-  width: 55%;
-  height: 50px;
-  overflow: hidden;   /* this is what stops the van escaping the button */
-  background: linear-gradient(to right, #fdfdfd, #f0efec);
-  border: 1px solid black;
-  border-radius: 8px;
+  width: 100%;
+  height: 100px;
+  overflow: hidden;   /* keeps the van clipped inside the capsule */
+  background: #080808;
+  border: 2px solid #ff2fb0;
+  border-radius: 999px;
+  animation: glow-pulse 1.8s ease-in-out infinite;
+}
+@keyframes glow-pulse{
+  0%, 100%{ box-shadow: 0 0 14px 3px rgba(255, 47, 176, 0.55), 0 0 34px 10px rgba(255, 47, 176, 0.32); }
+  50%{ box-shadow: 0 0 22px 6px rgba(255, 47, 176, 0.85), 0 0 55px 16px rgba(255, 47, 176, 0.5); }
 }
 
 .btn-primary {
   width: 100%;
-  height: 50px;
-  background: linear-gradient(to right, #fdfdfd, #f0efec);
-  color: black;
-  border: 2px solid aqua;
-  border-radius: 8px;
-  font-weight: bold;
+  height: 100%;
+  background: transparent;
+  color: #ffffff;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+  border: none;
+  font-weight: 700;
   cursor: pointer;
-  transition: opacity 0.25s ease, transform 0.3s ease;
-}
-.btn-primary:hover{
-  transform: scale(1);
-  border: 2px solid rgb(204, 54, 154);
-  box-shadow: rgb(48, 251, 251);
+  transition: opacity 0.25s ease;
 }
 .btn-primary.btn-hidden{
   opacity: 0;
@@ -53,43 +59,43 @@
 .van{
   position: absolute;
   top: 50%;
-  left: 0;
-  margin-top: -18px;   /* half of 36px van height, centers without transform */
+  left: 12px;
+  width: 110px;
+  height: 66px;
+  margin-top: -33px;   /* half of 66px van height, centers without transform */
   z-index: 2;          /* stays above the done label while driving */
   transition: opacity 0.35s ease;
 }
-.van-fade .wheel-spin{
-  animation-play-state: paused;  /* wheels stop turning once the van is hidden */
-}
-.wheel-spin{
-  transform-origin: center;
-  animation: spin 0.35s linear infinite;
-}
-@keyframes spin{
-  to{ transform: rotate(360deg); }
+.van-img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  -webkit-user-drag: none;
 }
 
 .order-done{
   position: absolute;
-  inset: 0;   /* full width now — van fades out, so no gap needs to be reserved for it */
+  inset: 0;
   z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  background: linear-gradient(to right, #fdfdfd, #f0efec);
-  color: #0d603a;
-  border: 1px solid #0d603a;
-  border-radius: 8px;
+  gap: 8px;
+  background: rgba(34, 197, 94, 0.12);
+  color: #22c55e;
+  border: 1px solid #22c55e;
+  border-radius: 999px;
   font-weight: bold;
+  font-size: 18px;
 }
 .check-dot{
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: #22c55e;
-  color: #fff;
-  font-size: 10px;
+  color: #080808;
+  font-size: 11px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
